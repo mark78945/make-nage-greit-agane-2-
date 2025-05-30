@@ -3,85 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Гайд на Naga Siren От величайшего Маркусика (Dota 2)</title>
+  <title>Гайд на Naga Siren — Dota 2</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #121212, #1e1e1e);
+      background: #121212;
       color: #a020f0;
       padding: 20px;
       line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
       overflow-x: hidden;
+      margin: 0;
+      position: relative;
+      z-index: 0;
     }
     h1, h2 {
       color: #a020f0;
       text-align: center;
-    }
-    .section {
-      background-color: #2a2a2a;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(160, 32, 240, 0.3);
-      padding: 20px;
-      margin: 20px 0;
-      max-width: 700px;
-      text-align: center;
+      margin-bottom: 12px;
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
-    .tip {
-      background-color: #333;
-      padding: 10px;
-      border-left: 4px solid #a020f0;
-      margin: 10px 0;
-      border-radius: 5px;
-      color: #d8b7ff;
-    }
-    button {
-      padding: 10px 20px;
-      background: linear-gradient(90deg, #a020f0, #8a02c9);
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      margin-top: 10px;
-    }
-    button:hover {
-      transform: scale(1.05);
-    }
-    iframe {
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      max-width: 100%;
-      position: relative;
-      z-index: 2;
-    }
-    ul, ol {
-      text-align: left;
-      margin: 0 auto;
-      display: inline-block;
-    }
-    li img {
-      vertical-align: middle;
-      margin-right: 8px;
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
-      box-shadow: 0 0 4px rgba(160, 32, 240, 0.6);
-    }
-
-    /* ВОЛНЫ */
     .wave-container {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100vh;
       overflow: hidden;
-      z-index: 0;
+      z-index: -1; /* фон */
       pointer-events: none;
     }
     .wave {
@@ -89,15 +35,15 @@
       bottom: 0;
       width: 200%;
       height: 200px;
-      background: rgba(0, 100, 255, 0.4);
+      background: rgba(0, 100, 255, 0.6);
       border-radius: 43% 57% 55% 45% / 30% 35% 65% 70%;
       animation: wave-animation 8s linear infinite;
-      filter: drop-shadow(0 0 10px rgba(0, 100, 255, 0.5));
+      filter: drop-shadow(0 0 10px rgba(0, 150, 255, 0.6));
     }
     .wave.second {
       bottom: 20px;
       animation-delay: 4s;
-      background: rgba(0, 150, 255, 0.3);
+      background: rgba(0, 150, 255, 0.4);
       border-radius: 40% 60% 60% 40% / 35% 40% 60% 65%;
     }
     @keyframes wave-animation {
@@ -106,7 +52,6 @@
       100% { transform: translateX(0) translateY(0); }
     }
 
-    /* NAGA */
     .naga-left, .naga-right {
       position: fixed;
       bottom: 20px;
@@ -129,7 +74,79 @@
       50% { transform: translateY(-15px); }
     }
 
-    /* Стили для предметов */
+    /* Меню вкладок */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 25px;
+      user-select: none;
+      z-index: 1;
+      position: relative;
+    }
+    .tab {
+      padding: 12px 28px;
+      cursor: pointer;
+      border-radius: 12px;
+      background: rgba(50, 0, 80, 0.8);
+      color: #bb77ff;
+      font-weight: 600;
+      box-shadow: 0 0 10px #a020f0;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      border: 2px solid transparent;
+    }
+    .tab:hover {
+      background: #8a02c9;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    .tab.active {
+      background: #a020f0;
+      color: #fff;
+      border-color: #fff;
+      box-shadow: 0 0 20px #bb77ff;
+      transform: scale(1.1);
+      pointer-events: none;
+    }
+
+    /* Контейнер для контента */
+    #content > div {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      background: rgba(18, 18, 18, 0.85);
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px #0099ff;
+      color: #cceeff;
+      user-select: text;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.5s ease, max-height 0.5s ease;
+      position: relative;
+      z-index: 1;
+    }
+    #content > div.active {
+      opacity: 1;
+      max-height: 2000px;
+    }
+
+    ul, ol {
+      text-align: left;
+      margin: 0 auto;
+      display: inline-block;
+      padding-left: 20px;
+      color: #cceeff;
+    }
+    li img {
+      vertical-align: middle;
+      margin-right: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      box-shadow: 0 0 4px rgba(160, 32, 240, 0.6);
+    }
+
     .item-row {
       display: flex;
       justify-content: space-between;
@@ -154,144 +171,111 @@
       box-shadow: 0 0 6px rgba(160, 32, 240, 0.5);
     }
 
-    /* Мини-карта */
-    .minimap {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      width: 150px;
-      height: auto;
-      z-index: 5;
-      border: 2px solid #a020f0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(160, 32, 240, 0.5);
-      background-color: #111;
+    iframe {
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      max-width: 100%;
+      height: 315px;
+      position: relative;
+      z-index: 1;
     }
-    .minimap img {
-      width: 100%;
-      height: auto;
-      display: block;
+
+    .tip {
+      background-color: #333;
+      padding: 10px;
+      border-left: 4px solid #a020f0;
+      margin: 10px 0;
+      border-radius: 5px;
+      color: #d8b7ff;
+      position: relative;
+      z-index: 1;
     }
-    .farm-zone {
-      position: absolute;
-      font-size: 14px;
-      color: #00ffcc;
-      pointer-events: auto;
-      cursor: help;
+
+    button {
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #a020f0, #8a02c9);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
     }
-    .farm-zone.top {
-      top: 25%;
-      left: 20%;
-    }
-    .farm-zone.bot {
-      top: 75%;
-      left: 70%;
-    }
-    .farm-zone.ancients {
-      top: 50%;
-      left: 45%;
-      color: gold;
-    }
-    @media (max-width: 768px) {
-      .minimap {
-        display: none;
-      }
+    button:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-
-  <div class="wave-container">
-    <div class="wave"></div>
-    <div class="wave second"></div>
-  </div>
 
   <img src="images/naga1.gif" alt="Naga Siren анимация слева" class="naga-left" />
   <img src="images/naga1.gif" alt="Naga Siren анимация справа" class="naga-right" />
 
   <h1>Гайд на Naga Siren ОТ ВЕЛИЧАЙШЕГО МАРКУСИКА — Dota 2</h1>
 
-  <div class="section">
-    <h2>что такое нага?</h2>
-    <p>Naga Siren — пиздатий тип на керри, пойдьош на мид виебу в сраку под песеньку <strong>Song of the Siren</strong>.</p>
+  <div class="tabs">
+    <div class="tab active" data-tab="guide">Гайд</div>
+    <div class="tab" data-tab="items">Предметы</div>
+    <div class="tab" data-tab="videos">Видео</div>
   </div>
 
-  <div class="section">
-    <h2>Стартовый закуп</h2>
-    <ul>
-      <li><img src="images/Quelling_Blade.png" alt="Quelling Blade" /> Quelling Blade</li>
-      <li><img src="images/Tango_icon.png" alt="Tango" /> Tango</li>
-      <li><img src="images/c.png" alt="Iron Branch" /> Iron Branch x2</li>
-      <li><img src="images/Slippers_of_Agility_icon.png" alt="Slippers of Agility" /> Slippers of Agility</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Скилл-билд</h2>
-    <ol>
-      <li><img src="images/Mirror_Image_icon.png" alt="Mirror Image" /> Mirror Image</li>
-      <li><img src="images/Ensnare_icon.png" alt="Ensnare" /> Ensnare</li>
-      <li><img src="images/Mirror_Image_icon.png" alt="Mirror Image" /> Mirror Image</li>
-      <li><img src="images/Rip_Tide_icon.png" alt="Rip Tide" /> Rip Tide</li>
-      <li><img src="images/Mirror_Image_icon.png" alt="Mirror Image" /> Mirror Image</li>
-      <li><img src="images/Song_of_the_Siren_icon.png" alt="Song of the Siren" /> Song of the Siren</li>
-      <li><img src="images/Mirror_Image_icon.png" alt="Mirror Image" /> Mirror Image</li>
-      <li><img src="images/Rip_Tide_icon.png" alt="Rip Tide" /> Rip Tide</li>
-      <li><img src="images/Rip_Tide_icon.png" alt="Rip Tide" /> Rip Tide</li>
-    </ol>
-  </div>
-
-  <div class="section">
-    <h2>Предметы</h2>
-    <div class="item-row">
-      <div class="item-left"><img src="images/Quelling_Blade.png" alt=""><br>Quelling Blade</div>
-      <div class="item-center"><img src="images/Tango_icon.png" alt=""><br>Tango</div>
-      <div class="item-right"><img src="images/Iron_Branch.png" alt=""><br>Iron Branch</div>
+  <div id="content">
+    <div id="guide" class="active">
+      <h2>Что такое Naga?</h2>
+      <p>Naga Siren — пиздатий тип на керри, пойдьош на мид виебу в сраку под песеньку <strong>Song of the Siren</strong>.</p>
+      <h2>Где фармить Наге?</h2>
+      <p>Фармить Наге лучше всего в лесу, на рунных точках и на безопасной линии, избегая ненужных драк до 6 уровня.</p>
+      <h2>Советы:</h2>
+      <div class="tip">НЕ Используй иллюзии для фарма по всей карте.</div>
+      <div class="tip">НЕ Сохраняй Song of the Siren для спасения команды или инициации.</div>
+      <div class="tip">НЕ Комбинируй ульт с Black Hole или Static Storm для командных боёв.</div>
+      <button onclick="showTip()">обоссать владосика</button>
+      <p id="random-tip"></p>
     </div>
-    <div class="item-row">
-      <div class="item-left"><img src="images/Slippers_of_Agility_icon.png" alt=""><br>Slippers of Agility</div>
-      <div class="item-center"><img src="images/Diffusal_Blade.png" alt=""><br>Diffusal Blade</div>
-      <div class="item-right"><img src="images/Mantstyle.png" alt=""><br>Manta Style</div>
+
+    <div id="items">
+      <h2>Основные предметы</h2>
+      <div class="item-row">
+        <div class="item-left"><img src="images/Quelling_Blade.png" alt="Quelling Blade"><br>Quelling Blade</div>
+        <div class="item-center"><img src="images/Tango_icon.png" alt="Tango"><br>Tango</div>
+        <div class="item-right"><img src="images/Iron_Branch_icon.png" alt="Iron Branch"><br>Iron Branch x2</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left"><img src="images/Slippers_of_Agility_icon.png" alt="Slippers of Agility"><br>Slippers of Agility</div>
+        <div class="item-center"><img src="images/Diffusal_Blade.png" alt="Diffusal Blade"><br>Diffusal Blade</div>
+        <div class="item-right"><img src="images/Mantstyle.png" alt="Manta Style"><br>Manta Style</div>
+      </div>
+
+      <div class="item-row center">
+        <div class="item-center"><img src="images/1.png" alt="Butterfly"><br>Butterfly</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left"><img src="images/taraska.png" alt="Heart of Tarrasque"><br>Heart of Tarrasque</div>
+        <div class="item-center"><img src="images/Disperser.png" alt="Black King Bar"><br>Black King Bar</div>
+        <div class="item-right"><img src="images/r.png" alt="Abyssal Blade"><br>Abyssal Blade</div>
+      </div>
+
+      <div class="item-row center">
+        <div class="item-center"><img src="images/b.png" alt="Bloodthorn"><br>Bloodthorn</div>
+      </div>
     </div>
-    <div class="item-row center">
-      <div class="item-center"><img src="images/1.png" alt=""><br>Butterfly</div>
-    </div>
-    <div class="item-row">
-      <div class="item-left"><img src="images/taraska.png" alt=""><br>Heart of Tarrasque</div>
-      <div class="item-center"><img src="images/Disperser.png" alt=""><br>Black King Bar</div>
-      <div class="item-right"><img src="images/r.png" alt=""><br>Abyssal Blade</div>
-    </div>
-    <div class="item-row center">
-      <div class="item-center"><img src="images/b.png" alt=""><br>Bloodthorn</div>
+
+    <div id="videos">
+      <h2>Видео гайды для ЕБЛАНОВ</h2>
+      <iframe src="https://www.youtube.com/embed/vG3AJpxN9es" title="YouTube video 1" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/FbHWjCQ5HH8" title="YouTube video 2" allowfullscreen></iframe>
     </div>
   </div>
 
-  <div class="section">
-    <h2>НАХУЙ ЕТИХ СОВЕТОВ</h2>
-    <div class="tip">НЕ Используй иллюзии для фарма по всей карте.</div>
-    <div class="tip">НЕ Сохраняй Song of the Siren для спасения команды или инициации.</div>
-    <div class="tip">НЕ Комбинируй ульт с Black Hole или Static Storm для командных боёв.</div>
-  </div>
-
-  <div class="section">
-    <h2>опять же НАХУЙ ЕТИХ СОВЕТОВ</h2>
-    <button onclick="showTip()">обоссать владосика</button>
-    <p id="random-tip"></p>
-  </div>
-
-  <div class="section">
-    <h2>Видео гайды для ЕБЛАНОВ</h2>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/vG3AJpxN9es" title="YouTube video 1" allowfullscreen></iframe>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/FbHWjCQ5HH8" title="YouTube video 2" allowfullscreen></iframe>
-  </div>
-
-  <!-- Мини-карта -->
-  <div class="minimap">
-    <img src="images/dota_minimap.png" alt="Dota 2 Minimap" />
-    <div class="farm-zone top" title="Фармим на топе (лес и линия)">⬤</div>
-    <div class="farm-zone bot" title="Фармим на боте (лес и линия)">⬤</div>
-    <div class="farm-zone ancients" title="Фармим древних крипов">★</div>
+  <div class="wave-container">
+    <div class="wave"></div>
+    <div class="wave second"></div>
   </div>
 
   <script>
@@ -304,10 +288,30 @@
       const tip = tips[Math.floor(Math.random() * tips.length)];
       document.getElementById("random-tip").innerText = tip;
     }
+
+    const tabs = document.querySelectorAll('.tab');
+    const contentDivs = document.querySelectorAll('#content > div');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        if(tab.classList.contains('active')) return;
+
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const target = tab.getAttribute('data-tab');
+        contentDivs.forEach(div => {
+          if(div.id === target) {
+            div.classList.add('active');
+          } else {
+            div.classList.remove('active');
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
-
 
 
 
