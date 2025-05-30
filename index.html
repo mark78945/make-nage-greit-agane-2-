@@ -109,6 +109,18 @@
       pointer-events: none;
     }
 
+    /* Анимация появления содержимого вкладок */
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* Контейнер для контента */
     #content > div {
       max-width: 700px;
@@ -122,13 +134,13 @@
       opacity: 0;
       max-height: 0;
       overflow: hidden;
-      transition: opacity 0.5s ease, max-height 0.5s ease;
+      transition: max-height 0.5s ease;
       position: relative;
       z-index: 1;
     }
     #content > div.active {
-      opacity: 1;
       max-height: 2000px;
+      animation: fadeSlideIn 0.8s ease forwards;
     }
 
     ul, ol {
@@ -212,8 +224,8 @@
 </head>
 <body>
 
-  <img src="images/naga1.gif" alt="Naga Siren анимация слева" class="naga-left" />
-  <img src="images/naga1.gif" alt="Naga Siren анимация справа" class="naga-right" />
+  <img src="images/naga_siren.gif" alt="Naga Siren анимация слева" class="naga-left" />
+  <img src="images/naga_siren.gif" alt="Naga Siren анимация справа" class="naga-right" />
 
   <h1>Гайд на Naga Siren ОТ ВЕЛИЧАЙШЕГО МАРКУСИКА — Dota 2</h1>
 
@@ -302,6 +314,11 @@
         const target = tab.getAttribute('data-tab');
         contentDivs.forEach(div => {
           if(div.id === target) {
+            // Сброс анимации чтобы повторялась при каждом показе
+            div.style.animation = 'none';
+            div.offsetHeight; // принудительный ререндер
+            div.style.animation = null;
+
             div.classList.add('active');
           } else {
             div.classList.remove('active');
