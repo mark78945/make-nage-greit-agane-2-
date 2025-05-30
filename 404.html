@@ -5,40 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>404 — Страница не найдена</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
     body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Mono', monospace, monospace;
       background: #121212;
       color: #a020f0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
-      text-align: center;
+      overflow: hidden;
+      position: relative;
     }
+
     h1 {
-      font-size: 6rem;
-      margin-bottom: 0;
+      font-size: 12rem;
+      margin: 0;
+      animation: fadeInUp 1s ease forwards, glow 2.5s ease-in-out infinite alternate;
+      opacity: 0;
+      color: #a020f0;
+      text-shadow:
+        0 0 10px #a020f0,
+        0 0 20px #a020f0,
+        0 0 30px #bb77ff,
+        0 0 40px #d900ff,
+        0 0 50px #d900ff,
+        0 0 60px #bb77ff,
+        0 0 70px #a020f0;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow:
+          0 0 5px #a020f0,
+          0 0 10px #a020f0,
+          0 0 15px #bb77ff,
+          0 0 20px #d900ff,
+          0 0 25px #d900ff,
+          0 0 30px #bb77ff,
+          0 0 35px #a020f0;
+      }
+      100% {
+        text-shadow:
+          0 0 15px #d900ff,
+          0 0 25px #d900ff,
+          0 0 35px #bb77ff,
+          0 0 45px #a020f0,
+          0 0 55px #a020f0,
+          0 0 65px #bb77ff,
+          0 0 75px #d900ff;
+      }
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin: 10px 0 30px 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.5s;
+      opacity: 0;
+    }
+
+    a {
+      color: black; /* Чёрный цвет текста */
+      background: linear-gradient(90deg, #a020f0, #8a02c9);
+      padding: 15px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 0 20px #bb77ff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 1.2s ease forwards;
+      animation-delay: 1s;
+      opacity: 0;
       user-select: none;
     }
-    p {
-      font-size: 1.5rem;
-    }
-    a {
-      color: #bb77ff;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 20px;
-    }
     a:hover {
-      text-decoration: underline;
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #d900ff;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .wave-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 150vw; /* шире экрана */
+      height: 250px;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+      filter: drop-shadow(0 0 15px #8a02c9);
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 250px;
+      background: rgba(160, 32, 240, 0.6);
+      border-radius: 43% 57% 55% 45% / 30% 35% 65% 70%;
+      animation: wave-animation 8s linear infinite;
+      filter: drop-shadow(0 0 15px #bb77ff);
+    }
+    .wave.second {
+      bottom: 20px;
+      animation-delay: 4s;
+      background: rgba(138, 2, 201, 0.4);
+      border-radius: 40% 60% 60% 40% / 35% 40% 60% 65%;
+    }
+    @keyframes wave-animation {
+      0% { transform: translateX(0) translateY(0); }
+      50% { transform: translateX(-25%) translateY(15px); }
+      100% { transform: translateX(0) translateY(0); }
     }
   </style>
 </head>
 <body>
   <h1>404</h1>
-  <p>Страница не найдена</p>
-  <a href="index.html">Вернуться на главную</a>
+  <h2>Страница не найдена</h2>
+  <a href="/">Вернуться на главную</a>
+
+  <div class="wave-container">
+    <div class="wave"></div>
+    <div class="wave second"></div>
+  </div>
 </body>
 </html>
+
